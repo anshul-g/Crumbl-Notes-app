@@ -40,7 +40,7 @@ def noteUpdate(request, pk):
 
 @api_view(['DELETE'])
 def noteDelete(request,pk):
-  note = Note.objects.get(id==pk)
+  note = Note.objects.get(id=pk)
   note.delete()
   return Response("Item deleted!")
   
