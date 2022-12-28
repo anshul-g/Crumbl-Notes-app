@@ -1,5 +1,3 @@
-import {useState, useEffect} from 'react';
-import axios from 'axios';
 import Note from '../components/Note.js';
 
 const style = {
@@ -11,11 +9,12 @@ const style = {
 }
 
 function NotesList(props) {
+  console.log(props)
 
   return(
     <div style={style}>
       {props.notes.map((note) => 
-        <Note key={note.id} id={note.id} title={note.title} content={note.content} />
+        <Note key={note.id} id={note.id} title={note.title} content={note.content} fetchData={props.fetchData}/>
       )}
     </div>
   )

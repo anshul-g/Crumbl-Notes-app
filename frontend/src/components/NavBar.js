@@ -1,5 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+
 const NavStyle = {
-    padding: '1rem',
+    padding: '1rem 2rem',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -11,10 +14,10 @@ const NavStyle = {
 function NavBar() {
     return(
         <div style={NavStyle}>
-            <span>Notes App</span>
+            <span>Crumbl.</span>
             <div>
-                <span>Hello User!</span>
-                <img style={{marginLeft: '1rem'}} src="" alt="AVI" />
+                <span style={{marginRight: '1rem'}}>Hello User!</span>
+                <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
             </div>
         </div>
     )

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import AddNoteModal from '../components/AddNoteModal.js';
 
 const style = {
-  position: 'absolute',
+  position: 'fixed',
   bottom: '3rem',
   right: '3rem',
   borderRadius: '4px',
@@ -10,8 +10,8 @@ const style = {
   border: 'none',
   cursor: 'pointer',
   fontWeight: '600',
-  fontSize: '1.2rem'
-}
+  fontSize: '1.2rem',
+};
 
 function AddNoteButton(props) {
   const [open, setOpen] = useState(false);
@@ -19,21 +19,15 @@ function AddNoteButton(props) {
   const handleAddBtn = () => setOpen(!open);
   const handleCloseBtn = async () => {
     await props.fetchData();
-    setOpen(!open)
+    setOpen(!open);
   };
 
   return (
     <>
       <AddNoteModal open={open} handleClose={handleCloseBtn} />
-      <div className='AddBtnContainer'>
-        <button
-          className={'primaryBtn'}
-          style={style}
-          onClick={handleAddBtn}
-        >
-          Add a note
-        </button>
-      </div>
+      <button className={'primaryBtn'} style={style} onClick={handleAddBtn}>
+        Add a note
+      </button>
     </>
   );
 }

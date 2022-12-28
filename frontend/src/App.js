@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes , Route } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -29,11 +29,21 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <NavBar />
-      <NotesList notes={notes}/>
-      <AddNoteButton fetchData={getNotesList}/> 
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/"
+            element={
+              <>
+                <NavBar />
+                <NotesList notes={notes} fetchData={getNotesList} />
+                <AddNoteButton fetchData={getNotesList}/>
+              </>
+          } />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
