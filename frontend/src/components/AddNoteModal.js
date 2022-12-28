@@ -1,8 +1,9 @@
 import Modal from 'react-modal';
+import '../styles/Button.css'
 
 const customStyles = {
   overlay: {
-    background: 'rgb(255,255,255,0.05)'
+    background: 'rgb(255,255,255,0.05)',
   },
 
   content: {
@@ -17,24 +18,43 @@ const customStyles = {
 };
 
 function AddNoteModal(props) {
-
-    return (
-      <Modal 
-        isOpen={props.open}
-        onRequestClose={props.handleCloseBtn}
-        style={customStyles}
-      >
-        <div style={{display: 'flex', flexDirection: 'column'}}>
-          <textarea style={{width: '100%', resize: 'none'}} type="text" placeholder="Title..." required />
-          <textarea style={{width: '100%', resize: 'none'}} type="text" placeholder="Pour it out Buddy!" required />
-          <div style={{marginTop: '1rem', marginLeft: 'auto'}}>
-            <button>Add image</button>
-            <button>Save</button>
-            <button onClick={props.handleCloseBtn}>Close</button>
-          </div>
+  return (
+    <Modal
+      isOpen={props.open}
+      onRequestClose={props.handleCloseBtn}
+      style={customStyles}
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', height: '100%' }}>
+        <div
+          style={{ padding: '0.5rem', border: '1px solid grey', borderRadius: '5px' }}
+          contentEditable="true"
+          aria-multiline="true"
+          role="textbox"
+          tabIndex="0"
+          aria-label="Title"
+          spellCheck="true"
+        >
+          Title
         </div>
-      </Modal>
-    )
+        <div
+          style={{ flex: '1', padding: '0.5rem', border: '1px solid grey', borderRadius: '5px' }}
+          contentEditable="true"
+          aria-multiline="true"
+          role="textbox"
+          tabIndex="1"
+          aria-label="Title"
+          spellCheck="true"
+        >
+          Write it down!
+        </div>
+        <div style={{ marginLeft: 'auto', flexShrink: '0' }}>
+          <button className={'primaryBtn'}>Add image</button>
+          <button className={'primaryBtn'}>Save</button>
+          <button className={'primaryBtn'} onClick={props.handleCloseBtn}>Close</button>
+        </div>
+      </div>
+    </Modal>
+  );
 }
 
 export default AddNoteModal;

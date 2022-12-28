@@ -5,7 +5,6 @@ const style = {
   position: 'absolute',
   bottom: '3rem',
   right: '3rem',
-  background: 'purple',
   borderRadius: '8px',
   padding: '1rem',
   border: 'none',
@@ -23,6 +22,7 @@ function AddNoteButton() {
       <AddNoteModal open={open} handleCloseBtn={handleCloseBtn} />
       <div className='AddBtnContainer'>
         <button
+          className={'primaryBtn'}
           style={style}
           onClick={handleAddBtn}
         >
