@@ -1,4 +1,6 @@
+import {useState} from 'react';
 import Modal from 'react-modal';
+import axios from 'axios';
 import '../styles/Button.css'
 
 const customStyles = {
@@ -18,10 +20,27 @@ const customStyles = {
 };
 
 function AddNoteModal(props) {
+  const [title, setTitle] = useState('Title');
+  const [content, setContent] = useState('Write it down!')
+
+  const onTitleChange = (e) => setTitle(e.target.value);
+  const onContentChange = (e) => setTitle(e.target.value);
+
+  const handleSave = async () => {
+    try{
+      const response = await axios.post('http://localhost:8000/api/note-create', {
+        "title": title,
+        "content": content
+      })
+      props.handleClose();
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <Modal
       isOpen={props.open}
-      onRequestClose={props.handleCloseBtn}
       style={customStyles}
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', height: '100%' }}>
@@ -33,6 +52,7 @@ function AddNoteModal(props) {
           tabIndex="0"
           aria-label="Title"
           spellCheck="true"
+          onChange={onTitleChange}
         >
           Title
         </div>
@@ -44,13 +64,14 @@ function AddNoteModal(props) {
           tabIndex="1"
           aria-label="Title"
           spellCheck="true"
+          onChange={onContentChange}
         >
           Write it down!
         </div>
         <div style={{ marginLeft: 'auto', flexShrink: '0' }}>
           <button className={'primaryBtn'}>Add image</button>
-          <button className={'primaryBtn'}>Save</button>
-          <button className={'primaryBtn'} onClick={props.handleCloseBtn}>Close</button>
+          <button className={'primaryBtn'} onClick={handleSave}>Save</button>
+          <button className={'primaryBtn'} onClick={props.handleClose}>Close</button>
         </div>
       </div>
     </Modal>

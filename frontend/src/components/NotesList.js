@@ -1,3 +1,5 @@
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 import Note from '../components/Note.js';
 
 const style = {
@@ -9,10 +11,28 @@ const style = {
 }
 
 function NotesList() {
+  const [notes, setNotes] = useState([]);
+  const url='http://localhost:8000/api';
+
+  const getNotesList = async() => {
+    try{
+      const resp = await axios.get(`${url}/notes-list`);
+      console.log(resp.data);
+      setNotes(resp.data);
+    } catch(error){
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getNotesList();
+  }, [])
+
   return(
     <div style={style}>
-      <Note />
-      <Note />
+      {notes.map((note) => 
+        <Note key={note.id} id={note.id} title={note.title} content={note.content} />
+      )}
     </div>
   )
 }

@@ -21,7 +21,7 @@ function AddNoteButton() {
 
   return (
     <>
-      <AddNoteModal open={open} handleCloseBtn={handleCloseBtn} />
+      <AddNoteModal open={open} handleClose={handleCloseBtn} />
       <div className='AddBtnContainer'>
         <button
           className={'primaryBtn'}
