@@ -2,7 +2,10 @@ const NavStyle = {
     padding: '1rem',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontWeight: '600',
+    background: 'rgb(180,64,255)',
+    fontSize: '1.2rem'
 }
 
 function NavBar() {

@@ -5,10 +5,12 @@ const style = {
   position: 'absolute',
   bottom: '3rem',
   right: '3rem',
-  borderRadius: '8px',
-  padding: '1rem',
+  borderRadius: '4px',
+  padding: '0.5rem 1rem',
   border: 'none',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  fontWeight: '600',
+  fontSize: '1.2rem'
 }
 
 function AddNoteButton() {
