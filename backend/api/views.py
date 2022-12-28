@@ -15,9 +15,27 @@ def notesList(request):
   serializer = NoteSerializer(notes, many=True)
   return Response(serializer.data)
 
+@api_view(['GET'])
+def noteDetail(request, pk):
+  notes = Note.objects.get(id==pk)
+  serializer = NoteSerializer(notes, many=False)
+  return Response(serializer.data)
+
 @api_view(['POST'])
 def noteCreate(request):
   serializer = NoteSerializer(request.data)
   if serializer.is_valid():
     serializer.save()
     return Response(serializer.data)
+
+@api_view(['PATCH'])
+def noteUpdate(request, pk):
+  note = Note.objects.get(id==pk)
+  serializer = NoteSerializer(note)
+
+@api_view(['DELETE'])
+def noteDelete(request,pk):
+  note = Note.objects.get(id==pk)
+  note.delete()
+  return Response("Item deleted!")
+  
