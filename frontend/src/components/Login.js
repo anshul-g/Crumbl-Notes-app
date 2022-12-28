@@ -1,4 +1,5 @@
 import '../styles/Button.css';
+import { Link } from 'react-router-dom';
 
 function Login() {
   const handleSubmit = (e) => {
@@ -28,7 +29,7 @@ function Login() {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          marginBottom: '2rem',
+          marginBottom: '1rem',
           textAlign: 'left',
         }}
       >
@@ -64,6 +65,7 @@ function Login() {
           Submit
         </button>
       </div>
+      <Link style={{color: 'white', textDecoration: 'none'}} to="/register">Create An Account</Link>
     </form>
   );
 }
