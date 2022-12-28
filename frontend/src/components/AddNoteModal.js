@@ -23,8 +23,8 @@ function AddNoteModal(props) {
   const [title, setTitle] = useState('Title');
   const [content, setContent] = useState('Write it down!')
 
-  const onTitleChange = (e) => setTitle(e.target.value);
-  const onContentChange = (e) => setTitle(e.target.value);
+  const onTitleChange = (e) => setTitle(e.target.outerText);
+  const onContentChange = (e) => setContent(e.target.outerText);
 
   const handleSave = async () => {
     try{
@@ -32,6 +32,7 @@ function AddNoteModal(props) {
         "title": title,
         "content": content
       })
+      console.log(response.data);
       props.handleClose();
     } catch(err) {
       console.log(err);
@@ -52,7 +53,7 @@ function AddNoteModal(props) {
           tabIndex="0"
           aria-label="Title"
           spellCheck="true"
-          onChange={onTitleChange}
+          onInput={onTitleChange}
         >
           Title
         </div>
@@ -64,7 +65,7 @@ function AddNoteModal(props) {
           tabIndex="1"
           aria-label="Title"
           spellCheck="true"
-          onChange={onContentChange}
+          onInput={onContentChange}
         >
           Write it down!
         </div>

@@ -13,11 +13,14 @@ const style = {
   fontSize: '1.2rem'
 }
 
-function AddNoteButton() {
+function AddNoteButton(props) {
   const [open, setOpen] = useState(false);
 
   const handleAddBtn = () => setOpen(!open);
-  const handleCloseBtn = () => setOpen(!open);
+  const handleCloseBtn = async () => {
+    await props.fetchData();
+    setOpen(!open)
+  };
 
   return (
     <>

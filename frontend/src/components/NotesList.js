@@ -7,30 +7,14 @@ const style = {
   gridTemplateColumns: 'repeat(5,1fr)',
   gridTemplateRows: 'masonry',
   gap: '1rem',
-  padding: '2rem'
+  padding: '2rem',
 }
 
-function NotesList() {
-  const [notes, setNotes] = useState([]);
-  const url='http://localhost:8000/api';
-
-  const getNotesList = async() => {
-    try{
-      const resp = await axios.get(`${url}/notes-list`);
-      console.log(resp.data);
-      setNotes(resp.data);
-    } catch(error){
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getNotesList();
-  }, [])
+function NotesList(props) {
 
   return(
     <div style={style}>
-      {notes.map((note) => 
+      {props.notes.map((note) => 
         <Note key={note.id} id={note.id} title={note.title} content={note.content} />
       )}
     </div>

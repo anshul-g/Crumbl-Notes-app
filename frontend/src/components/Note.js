@@ -8,7 +8,7 @@ function Note(props) {
   };
 
   return (
-    <div style={{border: '1px solid white', borderRadius: '4px', padding: '1rem'}} onClick={handleClick}>
+    <div style={{display:'flex', flexDirection: 'column', border: '1px solid white', borderRadius: '4px', padding: '1rem'}} onClick={handleClick}>
       {/* <AddNoteModal open={open} title={"Title"} content={"Content"} /> */}
       <h1 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{props.title}</h1>
       <p>{props.content}</p>

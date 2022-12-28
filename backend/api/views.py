@@ -27,6 +27,8 @@ def noteCreate(request):
   if serializer.is_valid():
     serializer.save()
     return Response(serializer.data)
+  else:
+    return Response('Data not in valid format')
 
 @api_view(['POST'])
 def noteUpdate(request, pk):
