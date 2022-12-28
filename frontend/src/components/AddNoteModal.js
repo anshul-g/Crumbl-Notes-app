@@ -1,8 +1,9 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
-import '../styles/Button.css'
+import '../styles/Button.css';
 
+// style to customise modal
 const customStyles = {
   overlay: {
     background: 'rgb(255,255,255,0.05)',
@@ -22,23 +23,28 @@ const customStyles = {
 
 function AddNoteModal(props) {
   const [title, setTitle] = useState('Title');
-  const [content, setContent] = useState('Write it down!')
+  const [content, setContent] = useState('Write it down!');
 
+  // functions to handle and store user input
   const onTitleChange = (e) => setTitle(e.target.outerText);
   const onContentChange = (e) => setContent(e.target.outerText);
 
+  // function to save the note
   const handleSave = async () => {
-    try{
-      const response = await axios.post('http://localhost:8000/api/note-create', {
-        "title": title,
-        "content": content
-      })
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/api/note-create',
+        {
+          title: title,
+          content: content,
+        }
+      );
       console.log(response.data);
       props.handleClose();
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <Modal
@@ -46,9 +52,23 @@ function AddNoteModal(props) {
       onRequestClose={props.handleClose}
       style={customStyles}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%', padding: '0.75rem', paddingBottom: '0' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          height: '100%',
+          padding: '0.75rem',
+          paddingBottom: '0',
+        }}
+      >
+        {/* contentEditable div for title */}
         <div
-          style={{ padding: '0.5rem 1rem', border: '1px solid grey', borderRadius: '5px'  }}
+          style={{
+            padding: '0.5rem 1rem',
+            border: '1px solid grey',
+            borderRadius: '5px',
+          }}
           contentEditable="true"
           aria-multiline="true"
           role="textbox"
@@ -59,8 +79,15 @@ function AddNoteModal(props) {
         >
           Title
         </div>
+
+        {/* contentEditable div for content */}
         <div
-          style={{  flex: '1', padding: '1rem', border: '1px solid grey', borderRadius: '5px'}}
+          style={{
+            flex: '1',
+            padding: '1rem',
+            border: '1px solid grey',
+            borderRadius: '5px',
+          }}
           contentEditable="true"
           aria-multiline="true"
           role="textbox"
@@ -72,8 +99,12 @@ function AddNoteModal(props) {
           Write it down!
         </div>
         <div style={{ paddingBottom: '0.75rem', marginLeft: 'auto' }}>
-          <button className={'primaryBtn'} onClick={handleSave}>Save</button>
-          <button className={'primaryBtn'} onClick={props.handleClose}>Close</button>
+          <button className={'primaryBtn'} onClick={handleSave}>
+            Save
+          </button>
+          <button className={'primaryBtn'} onClick={props.handleClose}>
+            Close
+          </button>
         </div>
       </div>
     </Modal>

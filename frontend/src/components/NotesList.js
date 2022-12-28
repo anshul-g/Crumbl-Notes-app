@@ -9,8 +9,8 @@ const style = {
 }
 
 function NotesList(props) {
-  console.log(props)
-
+  // maps through all the notes present in the NoteList
+  // and renders a <Note> component for each note in the list
   return(
     <div style={style}>
       {props.notes.map((note) => 

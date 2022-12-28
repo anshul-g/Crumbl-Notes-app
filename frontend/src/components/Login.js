@@ -65,7 +65,9 @@ function Login() {
           Submit
         </button>
       </div>
-      <Link style={{color: 'white', textDecoration: 'none'}} to="/register">Create An Account</Link>
+      <Link style={{ color: 'white', textDecoration: 'none' }} to="/register">
+        Create An Account
+      </Link>
     </form>
   );
 }

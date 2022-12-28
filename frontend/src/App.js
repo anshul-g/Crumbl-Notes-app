@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes , Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -9,39 +9,40 @@ import NotesList from './components/NotesList.js';
 
 import '../src/styles/App.css';
 
-
 function App() {
   const [notes, setNotes] = useState([]);
-  const url='http://localhost:8000/api';
+  const url = 'http://localhost:8000/api';
 
-  const getNotesList = async() => {
-    try{
+  const getNotesList = async () => {
+    try {
       const resp = await axios.get(`${url}/notes-list`);
       console.log(resp.data);
       setNotes(resp.data);
-    } catch(error){
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     getNotesList();
-  }, [])
+  }, []);
 
   return (
     <BrowserRouter>
       <div className="App">
+        <NavBar />
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<NavBar></NavBar>}></Route>
-          <Route path="/"
+          <Route path="/register" />
+          <Route
+            path="/"
             element={
               <>
-                <NavBar />
                 <NotesList notes={notes} fetchData={getNotesList} />
-                <AddNoteButton fetchData={getNotesList}/>
+                <AddNoteButton fetchData={getNotesList} />
               </>
-          } />
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>
