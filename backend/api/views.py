@@ -6,10 +6,6 @@ from .serialisers import NoteSerializer
 
 # Create your views here.
 @api_view(['GET'])
-def apiOverview(request) :
-  return Response({'data': 'Helloworld'})
-
-@api_view(['GET'])
 def notesList(request):
   notes = Note.objects.all()
   serializer = NoteSerializer(notes, many=True)

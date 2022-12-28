@@ -8,6 +8,7 @@ import AddNoteButton from '../src/components/AddNoteButton.js';
 import NotesList from './components/NotesList.js';
 
 import '../src/styles/App.css';
+import { AuthProvider } from './utils/AuthContext.js';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -30,7 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <NavBar />
+      <AuthProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" />
@@ -38,12 +39,15 @@ function App() {
             path="/"
             element={
               <>
+                <NavBar />
                 <NotesList notes={notes} fetchData={getNotesList} />
                 <AddNoteButton fetchData={getNotesList} />
               </>
             }
           />
+          
         </Routes>
+      </AuthProvider>
       </div>
     </BrowserRouter>
   );

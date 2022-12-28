@@ -1,13 +1,24 @@
-import '../styles/Button.css';
+import { useState, useContext } from 'react';
+import AuthContext from '../utils/AuthContext.js';
 import { Link } from 'react-router-dom';
+import '../styles/Button.css';
 
 function Login() {
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  const { loginUser } = useContext(AuthContext);
+  
+  const handleUsername = (e) => setUsername(e.target.value);
+  const handlePassword = (e) => setPassword(e.target.value);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    loginUser(username, password);
   };
 
   return (
     <form
+      onSubmit={handleSubmit}
       className="center"
       style={{
         width: '20vw',
@@ -33,7 +44,7 @@ function Login() {
           textAlign: 'left',
         }}
       >
-        <label>Email</label>
+        <label id="username">Username</label>
         <input
           style={{
             backgroundColor: '#202124',
@@ -44,10 +55,11 @@ function Login() {
             borderRadius: '4px',
             color: 'white',
           }}
-          type="email"
-          placeholder="name@email.com"
+          type="text"
+          placeholder="username"
+          onChange={handleUsername}
         />
-        <label>Password</label>
+        <label id="password">Password</label>
         <input
           style={{
             backgroundColor: '#202124',
@@ -60,8 +72,9 @@ function Login() {
           }}
           type="password"
           placeholder="Password"
+          onChange={handlePassword}
         ></input>
-        <button className={'primaryBtn'} type="submit" onClick={handleSubmit}>
+        <button className={'primaryBtn'} type="submit">
           Submit
         </button>
       </div>
