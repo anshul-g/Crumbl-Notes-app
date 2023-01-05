@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
+import AuthContext from '../utils/AuthContext.js';
 import '../styles/Button.css';
 
 // style for customising the modal
@@ -24,6 +25,7 @@ const customStyles = {
 function EditNoteModal(props) {
   const [title, setTitle] = useState(props.title);
   const [content, setContent] = useState(props.content);
+  const { authTokens } = useContext(AuthContext);
 
   // functions to handle and store user input
   const onTitleChange = (e) => setTitle(e.target.outerText);
@@ -32,10 +34,13 @@ function EditNoteModal(props) {
   // function to save the note
   const handleSave = async () => {
     try {
+      const config = {headers: {'Authorization' : 'Bearer ' + String(JSON.parse(authTokens).access)}};
       await axios.post(`http://localhost:8000/api/note-update/${props.id}`, {
         title: title,
         content: content,
-      });
+      },
+      config
+      );
       props.handleClose();
     } catch (err) {
       console.log(err);

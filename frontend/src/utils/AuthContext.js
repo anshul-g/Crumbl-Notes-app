@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
       password: pass 
     };
 
-    console.log(data.body);
     const response = await axios.post('http://localhost:8000/api/token/', data);
 
     if (response.status===200){

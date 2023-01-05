@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import AuthContext from '../utils/AuthContext.js';
 
@@ -16,14 +16,14 @@ const NavStyle = {
 
 function NavBar() {
     const {user, logoutUser} = useContext(AuthContext);
-    
+    console.log(user);
     return(
         <div style={NavStyle}>
             <span>Crumbl.</span>
             <div>
-                <span style={{marginRight: '1rem'}}>Hello {user?.user_id}</span>
-                <button onClick={logoutUser}>Logout</button>
-                <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+                <span style={{marginRight: '1rem'}}>Hello {user.username}</span>
+                <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faUser}></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faSignOut} onClick={logoutUser}></FontAwesomeIcon>
             </div>
         </div>
     )

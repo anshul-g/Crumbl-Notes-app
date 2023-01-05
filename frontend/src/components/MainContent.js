@@ -10,12 +10,12 @@ function MainContent(){
   const [notes, setNotes] = useState([]);
   const { user, authTokens } = useContext(AuthContext);
   const url = 'http://localhost:8000/api';
+  console.log(JSON.parse(authTokens).access);
 
   const getNotesList = async () => {
     try {
-      const config = { headers: {'Authorization' : 'Bearer ' + JSON.parse(authTokens.access)}};
+      const config = { headers: {'Authorization' : 'Bearer ' + String(JSON.parse(authTokens).access)}};
       const resp = await axios.get(`${url}/notes-list`, config);
-      console.log(resp.data);
       setNotes(resp.data);
     } catch (error) {
       console.log(error);
