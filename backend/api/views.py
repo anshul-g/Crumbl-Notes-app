@@ -1,20 +1,17 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Note
 from .serialisers import NoteSerializer
 
 # Create your views here.
 @api_view(['GET'])
 def notesList(request):
+  user = request.user;
+  print(user)
   notes = Note.objects.all()
   serializer = NoteSerializer(notes, many=True)
-  return Response(serializer.data)
-
-@api_view(['GET'])
-def noteDetail(request, pk):
-  notes = Note.objects.get(id=pk)
-  serializer = NoteSerializer(notes, many=False)
   return Response(serializer.data)
 
 @api_view(['POST'])
