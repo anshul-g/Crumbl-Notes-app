@@ -7,7 +7,7 @@ import EditNoteModal from '../components/EditNoteModal.js';
 
 function Note(props) {
   const [open, setOpen] = useState(false);
-  const { authTokens } = useContext(AuthContext);
+  const { authTokens } = useContext(AuthContext)
 
   // when user clicks the edit button
   // it opens up the modal for editing the note
