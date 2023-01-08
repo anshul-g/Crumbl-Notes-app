@@ -5,7 +5,7 @@ import '../styles/NotesList.css';
 function NotesList(props) {
 
   const breakpointColumnsObj = {
-    default: 5,
+    default: 4,
     1200: 3,
     850: 2,
     500: 1
