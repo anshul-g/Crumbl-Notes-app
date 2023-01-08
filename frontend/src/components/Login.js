@@ -21,7 +21,7 @@ function Login() {
       onSubmit={handleSubmit}
       className="center"
       style={{
-        width: '20vw',
+        width: '25rem',
         border: '1px solid white',
         padding: '2rem',
         textAlign: 'center',

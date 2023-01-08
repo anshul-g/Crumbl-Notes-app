@@ -1,31 +1,32 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import AuthContext from '../utils/AuthContext.js';
 import '../styles/Button.css';
 
-// style to customise modal
-const customStyles = {
-  overlay: {
-    background: 'rgb(255,255,255,0.05)',
-  },
-
-  content: {
-    top: '50%',
-    left: '50%',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    width: '40vw',
-    height: '65vh',
-    background: '#202124',
-    border: '1px solid white',
-  },
-};
 
 function AddNoteModal(props) {
   const [title, setTitle] = useState('Title');
   const [content, setContent] = useState('Write it down!');
-  const { user, authTokens } = useContext(AuthContext);
+  const { authTokens } = useContext(AuthContext);
+
+  // style to customise modal
+  const customStyles = {
+    overlay: {
+      background: 'rgb(255,255,255,0.05)',
+    },
+
+    content: {
+      top: '50%',
+      left: '50%',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: '40vw',
+      height: '65vh',
+      background: '#202124',
+      border: '1px solid white',
+    },
+  };
 
   // functions to handle and store user input
   const onTitleChange = (e) => setTitle(e.target.outerText);
@@ -43,12 +44,18 @@ function AddNoteModal(props) {
         }, 
         config
       );
-      console.log(response.data);
       props.handleClose();
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      setTitle("Title");
+      setContent("Write it down!");
+    };
+  }, [props.handleClose]);
 
   return (
     <Modal
@@ -103,7 +110,7 @@ function AddNoteModal(props) {
           Write it down!
         </div>
         <div style={{ paddingBottom: '0.75rem', marginLeft: 'auto' }}>
-          <button className={'primaryBtn'} onClick={handleSave}>
+          <button className={'primaryBtn'} onClick={handleSave} hidden={(title && content) ? false : true}>
             Save
           </button>
           <button className={'primaryBtn'} onClick={props.handleClose}>

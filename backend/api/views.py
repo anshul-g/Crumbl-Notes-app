@@ -39,7 +39,7 @@ def noteCreate(request):
 @api_view(['POST'])
 def noteUpdate(request, pk):
   note = Note.objects.get(id=pk)
-  serializer = NoteSerializer(instance=note, data=request.data)
+  serializer = NoteSerializer(instance=note, data=request.data, context={'request': request})
   if serializer.is_valid():
     serializer.save()
     return Response(serializer.data)

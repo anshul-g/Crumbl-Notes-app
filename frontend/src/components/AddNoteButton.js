@@ -16,7 +16,6 @@ const style = {
 
 function AddNoteButton(props) {
   const [open, setOpen] = useState(false);
-
   const handleAddBtn = () => setOpen(!open);
 
   // handles modal close button 
